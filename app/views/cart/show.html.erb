@@ -23,29 +23,30 @@
           </tr>
         </thead>
         <tbody>
-          <% @products.each do |product| %>
-            <tr>
+          <% @order_items.each do |item| %>
+            <tr id="item-<%= item.id %>">
               <td class="product-thumbnail">
-                <%= image_tag(product.image, class: "img-fluid") %>
+                <%= image_tag(item.product.image, class: "img-fluid") %>
               </td>
               <td class="product-name">
-                <h2 class="h5 text-black"><%= product.name %></h2>
+                <h2 class="h5 text-black"><%= item.product.name %></h2>
               </td>
-              <td><%= number_to_currency(product.price / 100.0) %></td>
+              <td><%= number_to_currency(item.product.price / 100.0) %></td>
               <td>
                 <div class="input-group mb-3" style="max-width: 120px;">
                   <div class="input-group-prepend">
-                    <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                    <%= link_to "-", cart_remove_path(product_id: item.product.id), remote: true, method: :post, class: "btn btn-outline-primary js-btn-minus" %>
                   </div>
-                  <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+
+                  <input type="text" class="form-control text-center" value="<%= item.quantity %>" readonly>
+
                   <div class="input-group-append">
-                    <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                    <%= link_to "+", cart_add_path(product_id: item.product.id), remote: true, method: :post, class: "btn btn-outline-primary js-btn-plus" %>
                   </div>
                 </div>
-
               </td>
-              <td><%= number_to_currency(product.price / 100.0) %></td>
-              <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
+              <td><%= number_to_currency(item.total_price / 100.0) %></td>
+              <td><%= link_to "X", cart_drop_item_path(id: item.id), method: :delete, remote: true, "data-cart-remove": true, "data-cart-remote-id": "#item-#{item.id}", class: "btn btn-primary btn-sm" %></td>
             </tr>
           <% end %>
         </tbody>
@@ -91,18 +92,36 @@
         </div>
         <div class="row mb-5">
           <div class="col-md-6">
+            <span class="text-black">Cena</span>
+          </div>
+          <div class="col-md-6 text-right">
+            <strong class="text-black"><%= number_to_currency(@total_price / 100.0) %></strong>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md-6">
+            <span class="text-black">DPH 21%</span>
+          </div>
+          <div class="col-md-6 text-right">
+            <strong class="text-black"><%= number_to_currency(@vat / 100.0) %></strong>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md-6">
             <span class="text-black">Celkem</span>
           </div>
           <div class="col-md-6 text-right">
-            <strong class="text-black"><%= number_to_currency(@products.sum(&:price) / 100.0) %></strong>
+            <strong class="text-black"><%= number_to_currency(@total_price_including_vat / 100.0) %></strong>
           </div>
         </div>
 
+        <!--
         <div class="row">
           <div class="col-md-12">
             <button class="btn btn-primary btn-lg py-3 btn-block">Přejít k placení</button>
           </div>
         </div>
+        -->
       </div>
     </div>
   </div>

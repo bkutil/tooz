@@ -44,7 +44,7 @@
                   <li><a href="#"><span class="icon icon-heart-o"></span></a></li>
                   -->
                   <li>
-                    <%= link_to(cart_path, class: "site-cart") do %>
+                    <%= link_to(cart_show_path, class: "site-cart") do %>
                       <span class="icon icon-shopping_cart"></span>
                       <span class="count"><%= current_order.order_items.count %></span>
                     <% end %>
@@ -68,7 +68,7 @@
               <%= link_to "Zboží", root_path(anchor: "zbozi") %>
             </li>
             <li>
-              <%= link_to "Košík", cart_path %>
+              <%= link_to "Košík", cart_show_path %>
             </li>
           </ul>
         </div>
