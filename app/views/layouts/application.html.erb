@@ -46,7 +46,7 @@
                   <li>
                     <%= link_to(cart_path, class: "site-cart") do %>
                       <span class="icon icon-shopping_cart"></span>
-                      <span class="count">2</span>
+                      <span class="count"><%= current_order.order_items.count %></span>
                     <% end %>
                   </li>
                   <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
