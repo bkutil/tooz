@@ -10,6 +10,6 @@ class Order < ApplicationRecord
   end
 
   def vat
-    ((21 * total_price) / 100).round
+    Libtooz::Vat.compute(country: :cz, amount: total_price)
   end
 end
