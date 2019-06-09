@@ -11,6 +11,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'mini_racer', platforms: :ruby
 
+gem 'libtooz-vat', git: 'https://github.com/bkutil/libtooz-vat'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

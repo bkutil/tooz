@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/bkutil/libtooz-vat
+  revision: 90fae0c568bd92a8e3ca8b63615bb6b4e47224c9
+  specs:
+    libtooz-vat (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -148,6 +154,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  libtooz-vat!
   mini_racer
   puma (~> 3.11)
   rails (~> 5.2.3)
