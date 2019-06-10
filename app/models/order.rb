@@ -1,6 +1,10 @@
 class Order < ApplicationRecord
   has_many :order_items, inverse_of: :order
 
+  def total_count
+    order_items.sum(&:quantity)
+  end
+
   def total_price
     order_items.sum(&:total_price)
   end
