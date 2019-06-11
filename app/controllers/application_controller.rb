@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def current_order
     @current_order ||= Order.includes(order_items: :product)
-                            .where(id: session[:order_id].to_i)
+                            .where(id: session[:order_id])
                             .first_or_initialize
   end
 end
